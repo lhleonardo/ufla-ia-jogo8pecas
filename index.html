@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Board Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="content">
+
+    <h1>Jogo das 8 peças</h1>
+
+    <div class="pieces">
+      <h3>Peças</h3>
+      <div class="dropzone">
+        <div draggable="true" class="piece red">1</div>
+        <div draggable="true" class="piece blue">2</div>
+        <div draggable="true" class="piece white">3</div>
+        <div draggable="true" class="piece green">4</div>
+        <div draggable="true" class="piece yellow">5</div>
+        <div draggable="true" class="piece purple">6</div>
+        <div draggable="true" class="piece gray">7</div>
+        <div draggable="true" class="piece orange">8</div>
+      </div>
+    </div>
+
+    <section class='boardzone'>
+      <div class="board">
+        <div class="row">
+          <div class="column"></div>
+          <div class="column"></div>
+          <div class="column"></div>
+        </div>
+        <div class="row">
+          <div class="column"></div>
+          <div class="column"></div>
+          <div class="column"></div>
+        </div>
+        <div class="row">
+          <div class="column"></div>
+          <div class="column"></div>
+          <div class="column"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="reset" class="button reset">Restaurar</button>
+        <button class="button start">Iniciar</button>
+      </div>
+  </div>
+  </section>
+
+  <script src="animations.js" prefer></script>
+</body>
+
+</html>
