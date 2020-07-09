@@ -82,6 +82,9 @@ class Board {
         elements.forEach(index => {
             const element = this.state[index];
 
+            // não deve fazer nada para o espaço em branco
+            if (this.state[index] === this.state['-1']) return;
+
             // novo elemento que sofrerá movimentação
             const newElement = { ...element };
             // localização do atual estado em branco
@@ -107,8 +110,8 @@ class Board {
                 blankSpace.column += 1;
             }
 
-            if (comparePieces(element, newElement)) {
-                nextValues.push({ ...this.state, newElement, "-1": blankSpace })
+            if (element.row !== newElement.row || element.column !== newElement.column) {
+                nextValues.push(new Board({ ...this.state, [index]: newElement, "-1": blankSpace }))
             }
         });
 
@@ -119,11 +122,40 @@ class Board {
     isValid() {
         const pieces = Object.keys(this.state);
 
-        const result = pieces.filter(index => comparePieces(this.state[index], CORRECT_MATCH[index]) === false);
-        if (result) {
+        const invalidPiece = pieces.find(index => {
+            const current = this.state[index];
+            const correct = CORRECT_MATCH[index];
+
+            if (current.row === correct.row && current.column === correct.column) {
+                return false;
+            }
+
+            return true;
+        });
+
+        if (invalidPiece) {
             return false;
         }
 
         return true;
+    }
+
+
+    print() {
+        const result = {
+            0: { 0: null, 1: null, 2: null },
+            1: { 0: null, 1: null, 2: null },
+            2: { 0: null, 1: null, 2: null },
+        };
+
+        const keys = Object.keys(this.state);
+
+        keys.forEach(key => {
+            const element = this.state[key];
+
+            result[element.row][element.column] = key;
+        });
+
+        return result;
     }
 }

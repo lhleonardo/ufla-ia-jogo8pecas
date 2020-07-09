@@ -24,7 +24,11 @@ const invalidBoard = new Board({
   '-1': { row: 1, column: 1 }
 });
 
-console.log(`Board is invalid? ${invalidBoard.isValid() ? 'no' : 'yes'}. Weight: ${invalidBoard.weight()}`);
-console.log(invalidBoard.state);
+console.log(`Board is invalid? ${invalidBoard.isValid() ? 'yes' : 'no'}. Weight: ${invalidBoard.weight()}`);
+console.log(invalidBoard.print());
 console.log('Next steps');
-console.log(invalidBoard.nextStep());
+const nextSteps = invalidBoard.nextStep();
+
+nextSteps.forEach(step => {
+  console.log(step.print());
+})
