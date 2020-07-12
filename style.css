@@ -41,6 +41,8 @@ h1 {
   padding: 20px;
   border-radius: 10px;
   width: 80%;
+
+  transition: display 0.2s;
 }
 
 

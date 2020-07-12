@@ -42,9 +42,10 @@ class Board {
         // }
 
         this.state = values;
+        this.weight = this.getWeight();
     }
 
-    weight() {
+    getWeight() {
         let result = 0;
 
         const pieces = Object.keys(this.state);
@@ -68,6 +69,24 @@ class Board {
                 let columnDifference = positiveDifference(currentLocation.column, correctLocation.column);
 
                 result += rowDifference + columnDifference;
+            }
+        })
+
+        return result;
+    }
+
+    isEqual(other) {
+        if (!(other instanceof Board)) return false;
+
+        const keys = Object.keys(other.state);
+
+        let result = true;
+        keys.forEach(key => {
+            const column = this.state[key];
+            const anotherColumn = other.state[key];
+
+            if (column.row !== anotherColumn.row || column.column !== anotherColumn.column) {
+                result = false;
             }
         })
 
@@ -156,6 +175,9 @@ class Board {
             result[element.row][element.column] = key;
         });
 
-        return result;
+        console.log(`${result['0']['0']}  ${result['0']['1']}  ${result['0']['2']}`);
+        console.log(`${result['1']['0']}  ${result['1']['1']}  ${result['1']['2']}       ${this.weight}`);
+        console.log(`${result['2']['0']}  ${result['2']['1']}  ${result['2']['2']}`);
+        console.log("");
     }
 }
