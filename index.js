@@ -1,27 +1,48 @@
-// const correctBoard = ;
+const startButton = document.getElementById('start');
 
-// console.log(`board is correct? ${correctBoard.isValid() ? 'yes' : 'no'}`);
+startButton.addEventListener('click', start)
 
-// const invalidBoard = new Board({
-//   1: { row: 0, column: 0 },
-//   2: { row: 0, column: 2 },
-//   3: { row: 1, column: 0 },
-//   4: { row: 1, column: 2 },
-//   5: { row: 2, column: 0 },
-//   6: { row: 2, column: 1 },
-//   7: { row: 0, column: 1 },
-//   8: { row: 2, column: 2 },
-//   '-1': { row: 1, column: 1 }
-// });
+function extractData() {
+  const extractValue = (row, column) => {
+    const piece = document
+      .querySelector(`.row[data-index="${row}"] .column[data-index="${column}"] .piece`);
 
-// console.log(`Board is invalid? ${invalidBoard.isValid() ? 'yes' : 'no'}. Weight: ${invalidBoard.weight()}`);
-// console.log(invalidBoard.print());
-// console.log('Next steps');
-// const nextSteps = invalidBoard.nextStep();
+    return piece;
+  }
 
-// nextSteps.forEach(step => {
-//   console.log(step.print());
-// })
+  const result = {};
 
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      let value = extractValue(i, j);
 
+      if (value) {
+        result[value.innerHTML] = { row: i, column: j };
+      } else {
+        result["-1"] = { row: i, column: j };
+      }
+    }
+  }
 
+  return result;
+}
+
+function start() {
+  const piecesContainer = document.querySelector('.pieces .dropzone');
+
+  if (piecesContainer.childElementCount) {
+    alert('Tabuleiro incompleto. Termine de configurá-lo');
+    return;
+  }
+
+  const structure = extractData();
+  const board = new Board(structure);
+
+  try {
+    const result = heuristicSearch(board);
+    console.log(result);
+  } catch (error) {
+    alert("Não foi possível encontrar resultado!");
+    console.error(error);
+  }
+}

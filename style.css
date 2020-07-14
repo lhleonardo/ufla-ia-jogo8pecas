@@ -220,7 +220,7 @@ section.boardzone .actions {
 }
 
 .board .row .column:not(:empty) {
-  border: none;
+  border: none !important;
 }
 
 .board .row .column:last-child {

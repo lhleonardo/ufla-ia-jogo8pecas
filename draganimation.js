@@ -28,7 +28,7 @@ function dragend() {
       const [oldElement] = parentElement.children;
 
       piecesContainer.appendChild(oldElement);
-      parentElement.removeChild(oldElement);
+      parentElement.children.clear();
     }
   }
 }
