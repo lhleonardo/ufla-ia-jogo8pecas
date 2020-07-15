@@ -6,8 +6,17 @@ const previousButton = document.getElementById('previous');
 
 const backButton = document.getElementById('back');
 
-startHardSearch.addEventListener('click', () => start(hardSearch));
-startHeuristicSearch.addEventListener('click', () => start(heuristicSearch));
+startHardSearch.addEventListener('click', () => {
+  startHardSearch.innerText = "Carregando...";
+  start(hardSearch);
+  startHardSearch.innerText = "Força bruta";
+});
+
+startHeuristicSearch.addEventListener('click', () => {
+  startHeuristicSearch.innerText = "Carregando...";
+  start(heuristicSearch);
+  startHeuristicSearch.innerText = "Heurística";
+});
 
 nextButton.addEventListener('click', nextStep);
 previousButton.addEventListener('click', previousStep);
@@ -62,7 +71,7 @@ function back() {
   document.querySelector(".content").classList.remove('result-mode');
   document.getElementById('mode').text = "Modo de entrada";
 
-  historyBoards.clear();
+  historyBoards.splice(0, historyBoards.length);
   step = 0;
 
   document.getElementById('progress').innerHTML = "";
@@ -72,8 +81,6 @@ function back() {
   if (step === historyBoards.length) {
     nextButton.disabled = true;
   }
-
-
 }
 
 function start(searchMethod) {
@@ -123,15 +130,10 @@ function showResults(steps) {
   document.getElementById('mode').text = "Modo passo a passo";
 
   historyBoards.push(...steps);
-
+  step = 0;
   document.getElementById('progress').innerHTML = `${step + 1}/${historyBoards.length}`;
 
-
-  previousButton.disabled = true;
-
-  if (step === historyBoards.length) {
-    nextButton.disabled = true;
-  }
+  configureButtons();
 }
 
 function configureButtons() {
