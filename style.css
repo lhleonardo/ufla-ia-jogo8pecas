@@ -33,6 +33,10 @@ h1 {
   margin-top: 30px;
 }
 
+h3 {
+  margin-top: 10px;
+}
+
 .pieces{ 
   margin-top: 30px;
 
@@ -44,7 +48,6 @@ h1 {
 
   transition: display 0.2s;
 }
-
 
 .pieces h3 {
   margin-bottom: 10px;
@@ -84,6 +87,12 @@ h1 {
   font-weight: bold;
 
   box-shadow: 0px 2px 5px black;
+
+  transition: transform .3s;
+}
+
+.piece:hover {
+  transform: scale(1.1);
 }
 
 .piece.red {
@@ -145,8 +154,8 @@ section.boardzone {
   display: flex;
   flex-direction: column;
 
-  background-color: #756c8b79;;
-  margin: 50px auto;
+  background-color: #756c8b79;
+  margin: 50px auto 0px;
   border-radius: 20px;
 
   /*70px de cada card*/
@@ -168,11 +177,18 @@ section.boardzone {
   margin-right: 20px;
   width: 70px;
   height: 70px;
-  border: 2px solid #2977ac;
   
   border-radius: 5px;
 
   transition: 300ms;
+}
+
+.information {
+  display: flex;
+}
+
+.board .row .column:empty {
+  border: 2px solid #2977ac;
 }
 
 section.boardzone .actions {
@@ -182,10 +198,14 @@ section.boardzone .actions {
 
   margin-left: 20px;
   width: 100px;
-  height: 70%;
+  height: 50%;
 }
 
-.actions .button {
+.boardzone .controls {
+  display: none;
+}
+
+.button {
   border: 0;
   outline: 0;
 
@@ -196,19 +216,28 @@ section.boardzone .actions {
   color: #eee;
   font-weight: bold;
   
-  transition: opacity 200ms;
+  transition: all 200ms;
 }
 
-.actions .button.reset {
+.button:disabled {
+  opacity: 0.3;
+}
+
+.button.reset {
   background-color: #e90027cb;
 }
 
-.actions .button.start {
+.button.green {
   background-color: #58a766;
 }
 
-.actions .button:hover {
-  opacity: 0.7;
+.button.blue {
+  background-color: #57529c;
+}
+
+.button:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: scale(1.2);
 }
 
 .highlight {
@@ -217,10 +246,6 @@ section.boardzone .actions {
 
 .highlight .piece {
   opacity: 0.6;
-}
-
-.board .row .column:not(:empty) {
-  border: none !important;
 }
 
 .board .row .column:last-child {
@@ -242,4 +267,69 @@ section.boardzone .actions {
 
 .pieces .dropzone.is-over {
   border: 2px dashed #2977ac !important;
+}
+
+.result-mode .pieces,
+.result-mode .boardzone .actions {
+  display:none;
+}
+
+.result-mode .boardzone {
+  flex-direction: column;
+}
+
+.result-mode .boardzone .controls {
+  width: 100%;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 15px;
+}
+
+.result-mode .boardzone .controls button {
+  outline: 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+
+#back {
+  display: none;
+}
+
+.result-mode #back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgb(241, 71, 71);
+
+  color: white;
+  font-weight: bold;
+
+  border: none;
+  border-radius: 50%;
+
+  width: 20px;
+  height: 20px;
+
+  padding: 5px;
+
+  transition: opacity 1s;
+
+  margin-right: 5px;
+}
+
+#back:hover {
+  transform: scale(1.3)
+}
+
+.piece.move-horizontal {
+  transform: translateX(var(--distance));
+}
+.piece.move-vertical {
+  transform: translateY(var(--distance));
 }

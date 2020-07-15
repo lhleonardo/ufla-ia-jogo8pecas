@@ -12,25 +12,33 @@ pieces.forEach(piece => {
 
 function dragstart() {
   this.classList.add('is-grabbing');
+
+  this.parentElement.classList.add('old-parent');
+
   columns.forEach(column => column.classList.add('highlight'));
   piecesContainer.classList.add('highlight');
 }
 
 function dragend() {
   this.classList.remove('is-grabbing');
+
   columns.forEach(column => column.classList.remove('highlight'));
   piecesContainer.classList.remove('highlight');
 
-  const parentElement = this.parentElement;
+  const parentElement = document.querySelector('.old-parent');
 
-  if (parentElement !== piecesContainer) {
-    if (parentElement.childElementCount > 1) {
-      const [oldElement] = parentElement.children;
-
-      piecesContainer.appendChild(oldElement);
-      parentElement.children.clear();
-    }
+  if (parentElement && parentElement !== piecesContainer) {
+    parentElement.innerHTML = "";
+    parentElement.classList.remove('old-parent');
   }
+
+  if (this.parentElement.childElementCount > 1) {
+    const [element] = this.parentElement.children;
+
+    piecesContainer.appendChild(element);
+    this.removeChild(element);
+  }
+
 }
 
 columns.forEach(column => {
@@ -67,7 +75,7 @@ resetButton.addEventListener('click', () => {
     if (column.childElementCount) {
       const [element] = column.children;
 
-      column.removeChild(element);
+      column.innerHTML = "";
       piecesContainer.appendChild(element);
     }
   })

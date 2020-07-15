@@ -1,5 +1,6 @@
 
 function heuristicSearch(board) {
+  console.log("Heurística sendo invocada");
   const discover = [{ board, parent: null }]
   const visitedNodes = []
 
@@ -64,7 +65,7 @@ function heuristicSearch(board) {
   let current = finishState;
 
   while (current !== null) {
-    path.unshift(current);
+    path.unshift(current.board);
 
     current = current.parent;
   }
@@ -108,7 +109,7 @@ function hardSearch(board) {
   let iterator = current;
 
   while (iterator !== null) {
-    path.unshift(iterator);
+    path.unshift(iterator.board);
 
     iterator = iterator.parent;
   }

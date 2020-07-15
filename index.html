@@ -16,6 +16,10 @@
   <div class="content">
 
     <h1>Jogo das 8 peças</h1>
+    <div class="information">
+      <button id="back" class="button-back">&lt</button>
+      <span id="mode">Modo de entrada</span>
+    </div>
 
     <div class="pieces">
       <h3>Peças</h3>
@@ -39,15 +43,15 @@
           <div class="column" data-index="0">
             <div draggable="true" class="piece gray">7</div>
           </div>
-          <div class="column" data-index="1"></div>
+          <div class="column" data-index="1">
+            <div draggable="true" class="piece orange">8</div>
+          </div>
           <div class="column" data-index="2">
             <div draggable="true" class="piece green">4</div>
           </div>
         </div>
         <div class="row" data-index="2">
-          <div class="column" data-index="0">
-            <div draggable="true" class="piece orange">8</div>
-          </div>
+          <div class="column" data-index="0"></div>
           <div class="column" data-index="1">
             <div draggable="true" class="piece purple">6</div>
           </div>
@@ -59,11 +63,19 @@
 
       <div class="actions">
         <button id="reset" class="button reset">Restaurar</button>
-        <button id="start" class="button start">Iniciar</button>
+        <button id="start-hard" class="button blue">Força Bruta </button>
+        <button id="start-heuristic" class="button green">Heurística</button>
       </div>
-  </div>
-  </section>
 
+      <div class="controls">
+        <button id="previous" class="button blue">&lt Anterior</button>
+        <span id="progress">1/15</span>
+        <button id="next" class="button green">Próximo &gt</button>
+      </div>
+    </section>
+  </div>
+
+  <script language="javascript" type="text/javascript" src="sweet-alert.js"></script>
   <script language="javascript" type="text/javascript" src="draganimation.js"></script>
   <script language="javascript" type="text/javascript" src="state.js"></script>
   <script language="javascript" type="text/javascript" src="search.js"></script>
